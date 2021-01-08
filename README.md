@@ -1,7 +1,13 @@
-# ffmpeg
-bash-script for ffmpeg
+# videoFromPhoto 
 
-#The ffmpeg bash script is created to shorten the long command that is used to merge the audio and picture together and convert it to a certain size that Instagram can read.
+A bash script.
+Creates a video suitable for Instagram from static picture and audio.
 
-#The script should work by executing the */ffmpeg* file and then giving arguments to it. 
-#The first argument will be the audio, the second argument will be the picture, the third (or the last) argument will be the name of the new file that has been converted using ffmpeg. 
+Usage:
+
+```
+videoFromPhoto <audio file> <photo> <output file>
+```
+
+To run the script, you need ffmpeg installed on your computer.
+
