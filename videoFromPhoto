@@ -1,8 +1,22 @@
 #!/bin/bash 
 
+#to do
+#check that script has exactly 3 parameters
+#check that $audio points to existing file
+#check that $picture points to existing file
+#check that $3 follows the pattern, filename.mp4
+
 audio="$1"
 picture="$2"
-output="$INSTAGRAM/$3"
+output="$PWD/$3"
+
+if [ -d "$INSTAGRAM" ]
+then
+    output="$INSTAGRAM/$3"
+fi
+
+echo "audio file: $audio picture file: $picture output file: $output"
+exit 0
 
 ffmpeg -i $audio \
 	-loop 1 \
