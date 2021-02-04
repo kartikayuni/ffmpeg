@@ -6,6 +6,11 @@
 #check that $picture points to existing file
 #check that $3 follows the pattern, filename.mp4
 
+if [ $# $3 ]
+then
+    echo "There are 3 parameters"
+fi
+
 audio="$1"
 picture="$2"
 output="$PWD/$3"
