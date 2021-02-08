@@ -6,18 +6,36 @@
 #check that $picture points to existing file
 #check that $3 follows the pattern, filename.mp4
 
-if [ $# $3 ]
+if [ $# -eq 3 ]
 then
-    echo "There are 3 parameters"
+    echo "There are 3 arguments"
 fi
 
 audio="$1"
 picture="$2"
 output="$PWD/$3"
 
+if [ ! -f "$audio" ]
+then
+    echo "Regular file $audio does not exist"
+    exit 1 
+fi
+
 if [ -d "$INSTAGRAM" ]
 then
     output="$INSTAGRAM/$3"
+fi
+
+if [ ! -f "$picture" ]
+then
+    echo "Regular file $picture does not exist"
+    exit 1
+fi
+
+if [ $3 = true ]
+then
+    echo "filename.mp4"
+    exit 1
 fi
 
 echo "audio file: $audio picture file: $picture output file: $output"
