@@ -6,9 +6,10 @@
 #check that $picture points to existing file
 #check that $3 follows the pattern, filename.mp4
 
-if [ $# -eq 3 ]
+if [ "$#" -ne "3" ]
 then
-    echo "There are 3 arguments"
+    echo "3 arguments required"
+    exit 1
 fi
 
 audio="$1"
