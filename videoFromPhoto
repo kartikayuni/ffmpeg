@@ -1,15 +1,20 @@
 #!/bin/bash 
 
 #to do
-#check that script has exactly 3 parameters
-#check that $audio points to existing file
-#check that $picture points to existing file
 #check that $3 follows the pattern, filename.mp4
+
+usage(){
+    cat <<EOU
+    $1
+    Usage:
+    $0 <audio file> <picture file> <output file>
+EOU
+    exit 1
+}
 
 if [ "$#" -ne "3" ]
 then
-    echo "3 arguments required"
-    exit 1
+    usage "3 arguments required"
 fi
 
 audio="$1"
@@ -18,8 +23,12 @@ output="$PWD/$3"
 
 if [ ! -f "$audio" ]
 then
-    echo "Regular file $audio does not exist"
-    exit 1 
+    usage "Audio file $audio does not exist"
+fi
+
+if [ ! -f "$picture" ]
+then
+    usage "Picture file $picture does not exist"
 fi
 
 if [ -d "$INSTAGRAM" ]
@@ -27,20 +36,8 @@ then
     output="$INSTAGRAM/$3"
 fi
 
-if [ ! -f "$picture" ]
-then
-    echo "Regular file $picture does not exist"
-    exit 1
-fi
-
-if [ $3 = true ]
-then
-    echo "filename.mp4"
-    exit 1
-fi
-
-echo "audio file: $audio picture file: $picture output file: $output"
-exit 0
+#echo "audio file: $audio picture file: $picture output file: $output"
+#exit 0
 
 ffmpeg -i $audio \
 	-loop 1 \
