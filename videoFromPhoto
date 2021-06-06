@@ -2,38 +2,60 @@
 
 #to do
 #check that $3 follows the pattern, filename.mp4
+#$0 is the name of the script itself
 
 usage(){
     cat <<EOU
     $1
     Usage:
-    $0 <audio file> <picture file> <output file>
+    $0 -a <audio file> -p <picture file> <output file>
 EOU
     exit 1
 }
+#script -a audiofile -p picturefile outputfile
+#VAR audio,picture,and output need to be deleted since the script use GETOPTS
+#audio="$1"
+#picture="$2"
+#output="$PWD/$3"
 
-if [ "$#" -ne "3" ]
-then
-    usage "3 arguments required"
-fi
+while getopts "a:p:" NAME
+do
+    if [ "$NAME" = "a" ]
+    then
+        audio="$OPTARG"
+    elif [ "$NAME" = "p" ]
+    then
+        picture="$OPTARG"
+    fi
+done
 
-audio="$1"
-picture="$2"
-output="$PWD/$3"
+#echo "parameters $@"
 
+#removing processed options 
+shift $((OPTIND - 1))
+
+#the first parameter is now output file
+#by default it will be written in $pwd
+output="$PWD/$1"
+
+#echo "parameters $@"
+
+#if audio file doesn't exist print error message, usage message and then exit 
 if [ ! -f "$audio" ]
 then
     usage "Audio file $audio does not exist"
 fi
 
+#if picture file doesn't exist print error message, usage message and then exit 
 if [ ! -f "$picture" ]
 then
     usage "Picture file $picture does not exist"
 fi
 
+#if $INSTAGRAM is a dir, write output file into it
 if [ -d "$INSTAGRAM" ]
 then
-    output="$INSTAGRAM/$3"
+    output="$INSTAGRAM/$1"
 fi
 
 #echo "audio file: $audio picture file: $picture output file: $output"
